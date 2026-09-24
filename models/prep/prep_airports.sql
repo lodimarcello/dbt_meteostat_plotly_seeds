@@ -16,4 +16,4 @@ FROM
 SELECT
 	*
 FROM
-	reordered_columns;
+	reordered_columns
