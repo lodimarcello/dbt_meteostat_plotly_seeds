@@ -3,6 +3,7 @@ SELECT
 	*,
 	DATE_PART('day', timestamp) AS date,
 	DATE_PART('hour', timestamp) AS time,
+	DATE_PART('hour', timestamp)::TEXT AS hour,
 	TO_CHAR(timestamp, 'FMmonth') AS month_name,
 	TO_CHAR(timestamp, 'FMDay') AS weekday,
 	DATE_PART('day', timestamp) AS date_day,
@@ -13,23 +14,7 @@ FROM
 	{{ref('staging_weather_hourly')}}
 ),
 add_hourtime AS (
-SELECT
-	airport_code,
-	station_id,
-	timestamp,
-	temp_c,
-	dewpoint_c,
-	humidity_perc,
-	precipitation_mm,
-	snow_mm,
-	wind_direction,
-	wind_speed_kmh,
-	wind_peakgust_kmh,
-	pressure_hpa,
-	sun_minutes,
-	condition_code,
-	date,
-	time,
+SELECT *,
 	CASE
 		WHEN DATE_PART('hour', timestamp) = 0
 	THEN 'midnight'
@@ -42,17 +27,11 @@ SELECT
 		WHEN DATE_PART('hour', timestamp) < 18
 	THEN 'afternoon'
 		ELSE 'evening'
-		END AS HOUR,
-		month_name,
-		weekday,
-		date_day,
-		date_month,
-		date_year,
-		cw	
-FROM
+		END AS day_part
+	FROM
 	updated_hourly
 )
 SELECT
 	*
 FROM
-	add_hourtime
+	add_hourtime;
