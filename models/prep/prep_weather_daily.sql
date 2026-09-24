@@ -8,7 +8,7 @@ SELECT
 	TO_CHAR(date, 'FMmonth') AS month_name,
 	TO_CHAR(date, 'FMDay') AS weekday
 FROM
-	{{ref('STAGING_WEATHER_DAILY')}}
+	{{ref('staging_weather_daily')}}
 	),
 	add_seasons AS (
 SELECT
