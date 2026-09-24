@@ -11,7 +11,7 @@ SELECT
 	tz,
 	dst
 FROM
-	{{REF('staging_airports')}}
+	{{ref('staging_airports')}}
 )
 SELECT
 	*
