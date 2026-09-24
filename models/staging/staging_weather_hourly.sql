@@ -7,16 +7,16 @@ WITH hourly_raw AS (
 hourly_flattened AS (
 					SELECT airport_code
 							,station_id
-							,(json_data ->> 'time')::DATE AS date
-							,(json_data ->> 'temp')::NUMERIC AS temperature
-							,(json_data ->> 'dwpt')::NUMERIC AS dew_point_c
-							,(json_data ->> 'rhum')::NUMERIC AS relative_humidity_p
+							,(json_data ->> 'time')::TIMESTAMP AS timestamp
+							,(json_data ->> 'temp')::NUMERIC AS temp_c
+							,(json_data ->> 'dwpt')::NUMERIC AS dewpoint_c
+							,(json_data ->> 'rhum')::NUMERIC AS humidity_perc
 							,(json_data ->> 'prcp')::NUMERIC AS precipitation_mm
-							,(json_data ->> 'snow')::NUMERIC::INTEGER AS max_snow_mm
-							,(json_data ->> 'wdir')::NUMERIC::INTEGER AS avg_wind_direction
-							,(json_data ->> 'wspd')::NUMERIC AS avg_wind_speed
-							,(json_data ->> 'wpgt')::NUMERIC AS avg_peakgust
-							,(json_data ->> 'pres')::NUMERIC AS avg_pressure_hpa
+							,(json_data ->> 'snow')::NUMERIC::INTEGER AS snow_mm
+							,(json_data ->> 'wdir')::NUMERIC::INTEGER AS wind_direction
+							,(json_data ->> 'wspd')::NUMERIC AS wind_speed_kmh
+							,(json_data ->> 'wpgt')::NUMERIC AS wind_peakgust_kmh
+							,(json_data ->> 'pres')::NUMERIC AS pressure_hpa
 							,(json_data ->> 'tsun')::NUMERIC::INTEGER AS sun_minutes
 							,(json_data ->> 'coco')::NUMERIC::INTEGER AS condition_code
 						FROM hourly_raw
