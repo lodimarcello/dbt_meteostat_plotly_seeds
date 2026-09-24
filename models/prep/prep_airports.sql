@@ -1,0 +1,19 @@
+WITH reordered_columns AS (
+SELECT
+	faa,
+	name,
+	city,
+	country,
+	region,
+	lat,
+	lon,
+	alt,
+	tz,
+	dst
+FROM
+	{{REF('staging_airports')}}
+)
+SELECT
+	*
+FROM
+	reordered_columns;
