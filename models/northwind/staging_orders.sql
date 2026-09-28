@@ -2,7 +2,7 @@ WITH standardized_data AS (
 SELECT
 	*
 FROM
-	{{SOURCE('northwind_data', 'orders')}}
+	{{source('northwind_data', 'orders')}}
 )
 SELECT
 	REPLACE(CAST(order_id AS VARCHAR(10)), ',', '') AS order_id,
